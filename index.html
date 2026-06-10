@@ -682,7 +682,7 @@
                 text-align: right;
             }
             .contact-popup-panel > .flex {
-                flex-direction: row-reverse;
+                flex-direction: row;
             }
             .contact-popup-panel .popup-eyebrow,
             .contact-popup-panel .popup-title,
@@ -725,6 +725,13 @@
                 }
             }
 
+        
+            /* تثبيت عنوان نافذة الحجز على اليمين */
+            .contact-popup-panel > .flex > div:first-child {
+                margin-inline-start: 0;
+                margin-inline-end: auto;
+                text-align: right;
+            }
         </style>
     </head>
     <body class="text-gray-900 antialiased">
