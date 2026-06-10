@@ -701,6 +701,30 @@
                 direction: ltr;
                 unicode-bidi: plaintext;
             }
+        
+            /* تكبير قسم العملاء */
+            #clients h2 {
+                font-size: clamp(2.3rem, 4.4vw, 3.6rem) !important;
+                line-height: 1.45 !important;
+                color: #111827 !important;
+                font-weight: 800 !important;
+                letter-spacing: 0.04em !important;
+            }
+            #clients p {
+                font-size: 1.35rem !important;
+                line-height: 2 !important;
+                color: #4b5563 !important;
+                font-weight: 600 !important;
+            }
+            @media (max-width: 640px) {
+                #clients h2 {
+                    font-size: 2rem !important;
+                }
+                #clients p {
+                    font-size: 1.15rem !important;
+                }
+            }
+
         </style>
     </head>
     <body class="text-gray-900 antialiased">
@@ -901,7 +925,7 @@
                         data-i18n="about_quote"
                         class="text-3xl md:text-5xl font-serif-en leading-tight text-gray-900"
                     >
-                        Every image should feel personal, polished and timeless.
+                        كل صورة يجب أن تكون شخصية، متقنة وخالدة.
                     </h3>
                     <p data-i18n="about_note" class="mt-6 text-gray-500 leading-8">
                         نهتم بالتفاصيل من أول فكرة إلى تسليم الصور النهائية، مع الحفاظ على تجربة
@@ -1465,13 +1489,12 @@
                     service_personal: "Personal Photography",
                     selected_works: "Selected Works",
                     works_subtitle: "A curated selection of moments captured through our lens.",
-                    showreel_label: "Work Highlights",
-                    showreel_title: "Selected moments from our coverage",
-                    showreel_desc:
-                        "A short film featuring samples of our photography style, from event details to natural moments, giving you a clearer feel for the quality and experience of OMS Studio.",
-                    showreel_tag_1: "Real moments",
-                    showreel_tag_2: "Professional coverage",
-                    showreel_tag_3: "Calm visual style",
+                    showreel_label: "نماذج من أعمالنا",
+                    showreel_title: "لحظات مختارة من تغطياتنا",
+                    showreel_desc: "فيديو قصير يجمع لقطات من أسلوبنا في التصوير، من تفاصيل الفعاليات إلى اللحظات العفوية، ليعطيك فكرة أوضح عن جودة العمل وتجربة OMS Studio.",
+                    showreel_tag_1: "لقطات واقعية",
+                    showreel_tag_2: "تغطية احترافية",
+                    showreel_tag_3: "إحساس بصري هادئ",
                     why_eyebrow: "Why OMS Studio",
                     why_title: "What do you receive when you work with us?",
                     why_subtitle:
@@ -1515,7 +1538,8 @@
                     const key = el.dataset.i18n;
                     if (translations[lang][key]) el.textContent = translations[lang][key];
                 });
-                renderGalleries();
+                applyLanguage(currentLang);
+            renderGalleries();
             }
             document.getElementById("langToggle").onclick = () =>
                 applyLanguage(currentLang === "ar" ? "en" : "ar");
