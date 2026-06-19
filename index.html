@@ -7,7 +7,7 @@
 
         <script src="https://cdn.tailwindcss.com"></script>
         <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
             rel="stylesheet"
         />
         <link
@@ -27,15 +27,50 @@
                 --soft: #f7f6f3;
                 --gold: #d6b476;
             }
+
+            /* ==========================================================
+               تحسين الخطوط
+               - Dubai هو الخط الأساسي للعربي إذا كان موجوداً عند الزائر.
+               - Noto Kufi Arabic يعمل كبديل واضح وجميل من Google Fonts.
+               - Playfair Display للعناوين الإنجليزية الفخمة.
+               ========================================================== */
+            h1,
+            h2,
+            h3,
+            .section-divider-title,
+            .contact-primary,
+            .popup-title {
+                font-family: "Dubai", "Noto Kufi Arabic", "Inter", Arial, sans-serif;
+                font-weight: 800;
+                letter-spacing: -0.015em;
+            }
+
+            html[dir="ltr"] h1,
+            html[dir="ltr"] h2,
+            html[dir="ltr"] .font-serif-en {
+                font-family: "Playfair Display", serif;
+                letter-spacing: 0;
+            }
+
+            p,
+            nav a,
+            button,
+            .contact-secondary,
+            .showreel-desc,
+            .showreel-note,
+            .footer-contact-link {
+                font-family: "Dubai", "Noto Kufi Arabic", "Inter", Arial, sans-serif;
+            }
+
             @font-face {
-                font-family: "SaudiWeb";
+                font-family: "SaudiWebDisabled";
                 src: url("assets/fonts/SaudiWeb-Regular.woff2") format("woff2");
                 font-weight: 400;
                 font-style: normal;
                 font-display: swap;
             }
             @font-face {
-                font-family: "SaudiWeb";
+                font-family: "SaudiWebDisabled";
                 src: url("assets/fonts/SaudiWeb-Bold.woff2") format("woff2");
                 font-weight: 700;
                 font-style: normal;
@@ -46,14 +81,15 @@
                 scroll-behavior: auto;
             }
             body {
-                font-family: "SaudiWeb", "IBM Plex Sans Arabic", "Tajawal", sans-serif;
+                font-family: "Dubai", "Noto Kufi Arabic", "Inter", Arial, sans-serif;
                 background: #fff;
                 color: #111827;
                 font-size: 19px;
             }
             html[dir="rtl"] .font-serif-en {
-                font-family: "SaudiWeb", "IBM Plex Sans Arabic", sans-serif;
-                font-weight: 700;
+                font-family: "Dubai", "Noto Kufi Arabic", sans-serif;
+                font-weight: 800;
+                letter-spacing: -0.02em;
             }
             html[dir="ltr"] body {
                 font-family: "Inter", sans-serif;
@@ -619,7 +655,31 @@
                 border-radius: 18px;
                 box-shadow: 0 22px 70px rgba(0, 0, 0, 0.45);
             }
+            
+            /* واتر مارك الشعار يظهر فقط عند تكبير الصورة */
+            .lightbox-panel::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                z-index: 5;
+                pointer-events: none;
+                background-image: url("assets/branding/oms-studio-champagne-gold.png");
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: min(44vw, 420px) auto;
+                opacity: 0.26;
+                filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.35));
+            }
+
+            .lightbox-panel img {
+                -webkit-user-drag: none;
+                user-select: none;
+            }
+
             .lightbox-close {
+                z-index: 10;
+            }
+.lightbox-close {
                 position: absolute;
                 top: -14px;
                 right: -14px;
@@ -1644,6 +1704,20 @@
             lightbox.onclick = (e) => {
                 if (e.target === lightbox) closeLightbox();
             };
+
+            /* منع الحفظ السريع والسحب من نافذة التكبير فقط */
+            document.addEventListener("contextmenu", function (e) {
+                if (e.target.closest(".lightbox-panel")) {
+                    e.preventDefault();
+                }
+            });
+
+            document.addEventListener("dragstart", function (e) {
+                if (e.target.closest(".lightbox-panel img")) {
+                    e.preventDefault();
+                }
+            });
+
             /* مراقبة العناصر وإظهارها تدريجياً عند الوصول إليها */
             function revealAll() {
                 const obs = new IntersectionObserver(
